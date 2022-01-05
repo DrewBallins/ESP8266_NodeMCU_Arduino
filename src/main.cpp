@@ -105,6 +105,6 @@ static void send_dht_data_udp(void)
    dht_data_message.write(dht_data_packed, sizeof(dht_data_packed));
 
    // finally we send the udp packet with packed data to rpi for processing
-   udp.broadcastTo(dht_data_message, udp_port);
-   udp.sendTo(dht_data_message, rpi_IP_address, udp_port);
+   udp.broadcastTo(dht_data_message, udp_port);             // TODO: why does this work
+   udp.sendTo(dht_data_message, rpi_IP_address, udp_port);  // but this doesn't??
 }
