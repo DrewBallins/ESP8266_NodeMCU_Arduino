@@ -21,8 +21,10 @@
  * Local Function Declarations
  ******************************/
 static void calculate_dht_data(void);
-static void display_dht_data_serial(void);
 static void send_dht_data_udp(void);
+#ifdef SERIAL_DEBUG
+static void display_dht_data_serial(void);
+#endif
 
 /*******************************
  * Initialize DHT Sensor
@@ -84,6 +86,7 @@ static void calculate_dht_data(void)
    dht_temperature = dht.readTemperature();
 }
 
+#ifdef SERIAL_DEBUG
 static void display_dht_data_serial(void)
 {
    Serial.print("DHT Humidity = ");
@@ -93,6 +96,7 @@ static void display_dht_data_serial(void)
    Serial.print(dht_temperature);
    Serial.println("C");   
 }
+#endif
 
 static void send_dht_data_udp(void)
 {
@@ -110,7 +114,11 @@ static void send_dht_data_udp(void)
    dht_data_message.write(dht_data_packed, sizeof(dht_data_packed));
 
    // finally we send the udp packet with packed data to rpi for processing
+#ifdef SERIAL_DEBUG
    size_t send_result = udp.sendTo(dht_data_message, rpi_IP_address, udp_port);
+#else
+   (void)udp.sendTo(dht_data_message, rpi_IP_address, udp_port);
+#endif
 
 #ifdef SERIAL_DEBUG
    // print out error message (if any) or length
