@@ -36,8 +36,8 @@ float dht_temperature;
 /*******************************
  * Initialize UDP
  ******************************/
-const char * ssid = "WILD_2P4";
-const char * password = "purplebolt482";
+const char * ssid = "REDACTED";   // Insert local WAN name here
+const char * password = "REDACTED"; // Insert local WAN password here
 AsyncUDP udp;
 IPAddress rpi_IP_address = IPAddress(192,168,1,14);
 uint16_t udp_port = 42069;
