@@ -125,7 +125,7 @@ static void send_dht_data_udp(void)
 
 #ifdef SERIAL_DEBUG
    // print out length of packed data
-   Serial.print("dacked data length = ");
+   Serial.print("packed data length = ");
    Serial.println(pack_result);
    
    // print out packed data
